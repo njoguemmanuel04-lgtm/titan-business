@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TITAN V10.2 - $4/DAY</title>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:Arial;text-align:center;padding:20px}
+.btn{display:block;margin:12px auto;padding:16px;width:90%;max-width:320px;background:#00ff88;color:#000;font-weight:bold;border:none;border-radius:10px;font-size:16px;text-decoration:none}
+.btn2{background:#222;color:#fff;border:1px solid #00ff88}
+.box{background:#151515;padding:15px;border-radius:12px;margin:15px 0;border:1px solid #222}
+input{width:90%;padding:12px;border-radius:8px;border:none;margin:10px 0}
+#tradeUI{display:none}
+</style>
+</head>
+<body>
+
+<h2>🔥 TITAN V10.2 BUSINESS</h2>
+<p style="color:#00ff88">W:12 L:3 Today | $4/DAY SYSTEM</p>
+<p style="font-size:12px;color:#888">IB: 8LL4ZC87RZWH | Code: AHGXKPKXUDDR</p>
+
+<div id="gate">
+<div class="box">
+<h3>Step 1: Connect Deriv</h3>
+<p style="font-size:13px;color:#aaa">New? Create account first. Old? Create 2nd account with new email.</p>
+<a class="btn" href="https://t.deriv.link?t=8LL4ZC87RZWH" target="_blank">1. Create New Deriv Account (FREE)</a>
+<a class="btn btn2" href="https://t.deriv.link?t=8LL4ZC87RZWH" target="_blank">2. Create 2nd Account For TITAN (Same ID, New Email)</a>
+<p style="font-size:11px;color:#666;margin-top:10px">Both links tagged to IB 8LL4ZC87RZWH - You earn bonus $5</p>
+</div>
+
+<div class="box">
+<h3>Step 2: Paste API Token</h3>
+<input id="token" placeholder="Paste Deriv API Token here">
+<button class="btn" onclick="connect()">CONNECT & START TRADING</button>
+<p style="font-size:11px"><a href="https://app.deriv.com/account/api-token" target="_blank" style="color:#00ff88">How to get token? Click here (30 sec)</a></p>
+</div>
+
+<div class="box" style="border-color:#ff4444">
+<p style="color:#ff4444;font-weight:bold">⚠️ TIME LOCK ACTIVE</p>
+<p id="timeMsg" style="font-size:13px"></p>
+</div>
+</div>
+
+<div id="tradeUI">
+<h3 id="balance">Balance: $0.00</h3>
+<h2 id="pnl">P: $0.00 / $2.00</h2>
+<button class="btn" id="startBtn">START TITAN</button>
+<button class="btn btn2" id="stopBtn">STOP</button>
+<p id="log" style="font-size:12px;color:#aaa"></p>
+</div>
+
+<script>
+const AFF_LINK = "https://t.deriv.link?t=8LL4ZC87RZWH";
+const TP = 2; const BASE = 0.35;
+
+// TIME LOCK - Only allow 09:00 & 15:00 Nairobi
+function checkTime(){
+  const now = new Date();
+  const h = now.getHours(); // Nairobi is your phone time
+  const el = document.getElementById('timeMsg');
+  if((h>=9 && h<=10) || (h>=15 && h<=16)){
+    el.innerHTML = "✅ TRADING WINDOW OPEN: "+h+":00 - Trade now!";
+    el.style.color="#00ff88";
+    return true;
+  } else {
+    el.innerHTML = "🔒 CLOSED. Next window: 09:00 & 15:00 Nairobi. Bot locked to protect your account.";
+    el.style.color="#ff4444";
+    return false;
+  }
+}
+checkTime();
+
+// CONNECT LOGIC - (Paste your existing TITAN V10.2 JS here below)
+function connect(){
+  const t = document.getElementById('token').value;
+  if(t.length < 10){alert("Paste valid token");return}
+  if(!checkTime()){alert("Outside trading time! Come back 09:00 or 15:00");return}
+  localStorage.setItem("deriv_token", t);
+  document.getElementById('gate').style.display='none';
+  document.getElementById('tradeUI').style.display='block';
+  // YOUR WEBSOCKET CONNECT CODE GOES HERE
+  document.getElementById('log').innerText = "Connected. IB 8LL4ZC87RZWH active. Ready to START.";
+}
+
+// YOUR FULL TITAN TRADING ENGINE PASTE BELOW THIS LINE
+// ... keep your existing start/stop/martingale logic ...
+
+</script>
+</body>
+</html>
